@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsh Modi | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            --secondary-gradient: linear-gradient(135deg, #0ea5e9, #06b6d4, #10b981);
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-dark: rgba(15, 23, 42, 0.8);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--darker);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Animated background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+        }
+
+        .blob-1 {
+            width: 600px;
+            height: 600px;
+            background: #6366f1;
+            top: -300px;
+            right: -100px;
+            animation: float 20s ease-in-out infinite alternate;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: #8b5cf6;
+            bottom: -200px;
+            left: -100px;
+            animation: float 15s ease-in-out infinite alternate-reverse;
+        }
+
+        .blob-3 {
+            width: 300px;
+            height: 300px;
+            background: #10b981;
+            top: 40%;
+            right: 30%;
+            animation: float 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(100px, 100px) rotate(180deg);
+            }
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            padding: 0 2rem;
+        }
+
+        .glass-card {
+            background: var(--glass-dark);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeUp 1s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+
+        .menu-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--glass-dark);
+            backdrop-filter: blur(12px);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-btn i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: var(--glass-dark);
+            backdrop-filter: blur(12px);
+            z-index: 99;
+            transition: right 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu.active {
+            right: 0;
+        }
+
+        .menu ul {
+            list-style: none;
+        }
+
+        .menu li {
+            margin-bottom: 2rem;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .menu a:hover {
+            transform: translateX(10px);
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        .logo {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            z-index: 100;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        .job-title {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-gradient);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+            }
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .lead {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            transform: translateX(0);
+        }
+
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeUp 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .section-title h2 {
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--glass-dark);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1s ease-out forwards;
+            animation-delay: calc(var(--i) * 0.2s);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            height: 250px;
+            background: linear-gradient(45deg, #6366f1, #10b981);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .project-image::after {
+            content: 'View Project';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-image::after {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            background: var(--glass);
+            backdrop-filter: blur(5px);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--primary-gradient);
+            transform: translateY(-3px);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            animation: fadeRight 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeRight {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0.7;
+        }
+
+        .about-image img {
+            width: 100%;
+            display: block;
+        }
+
+        .about-content {
+            animation: fadeLeft 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeLeft {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill {
+            background: var(--glass);
+            backdrop-filter: blur(5px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill:hover {
+            background: var(--primary-gradient);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--glass-dark);
+            backdrop-filter: blur(12px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeUp 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 0;
+            left: 1rem;
+            transform: translateY(-50%);
+            background: var(--glass-dark);
+            padding: 0 0.5rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.6);
+        }
+
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            background: var(--glass-dark);
+            backdrop-filter: blur(12px);
+            position: relative;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icon:hover {
+            background: var(--primary-gradient);
+            transform: translateY(-5px) rotate(10deg);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Experience section */
+        .experience-item {
+            background: var(--glass-dark);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeUp 1s ease-out forwards;
+            opacity: 0;
+            animation-delay: calc(var(--i) * 0.2s);
+        }
+
+        .experience-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .experience-company {
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .experience-date {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .experience-role {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .experience-description ul {
+            list-style-type: none;
+        }
+
+        .experience-description li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .experience-description li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+        }
+
+        /* Intersection Observer Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .glass-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            form {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="logo">Harsh Modi</div>
+
+    <nav>
+        <div class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="menu" id="menu">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="glass-card">
+            <span class="job-title">Tech Lead</span>
+            <h1>Hello, I'm Harsh Modi</h1>
+            <p class="lead">Experienced Senior Mobile Developer proficient in cross-platform application development. I craft elegant mobile experiences with Flutter, Kotlin, and Java.</p>
+            <a href="#projects" class="btn btn-primary">Explore My Work</a>
+        </div>
+    </header>
+
+    <section id="experience">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Professional Experience</h2>
+            </div>
+            
+            <!-- Experience 1 -->
+            <div class="experience-item reveal" style="--i: 1">
+                <div class="experience-title">
+                    <div class="experience-company">Codonnier Solutions</div>
+                    <div class="experience-date">Mar 2021 – Present</div>
+                </div>
+                <div class="experience-role">Tech Lead</div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Led and mentored a team of Flutter developers, fostering a high-performing and collaborative environment.</li>
+                        <li>Designed and optimized mobile applications using the latest Flutter SDK to enhance user experience and performance.</li>
+                        <li>Managed development roadmaps and task prioritization, successfully launching multiple apps on Google Play and the App Store.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Experience 2 -->
+            <div class="experience-item reveal" style="--i: 2">
+                <div class="experience-title">
+                    <div class="experience-company">Uffizio</div>
+                    <div class="experience-date">Nov 2017 – Feb 2021</div>
+                </div>
+                <div class="experience-role">Sr. Android Developer</div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Developed and maintained high-performance Android apps in Kotlin, enhancing user experience.</li>
+                        <li>Migrated critical modules from Java to Kotlin, reducing codebase size by 25% and improving maintainability.</li>
+                        <li>Designed and integrated RESTful APIs in Java, applying SOLID principles for scalable solutions.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Experience 3 -->
+            <div class="experience-item reveal" style="--i: 3">
+                <div class="experience-title">
+                    <div class="experience-company">Ploceus Technology</div>
+                    <div class="experience-date">Feb 2017 – Sep 2017</div>
+                </div>
+                <div class="experience-role">Android Developer</div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Developed a feature-rich image editor using the Canvas API in Java, enabling drawing, annotation, and advanced image manipulation.</li>
+                        <li>Implemented custom tools and transformations, including brushes, shapes, layering, filtering, scaling, and rotation for a versatile editing experience.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Experience 4 -->
+            <div class="experience-item reveal" style="--i: 4">
+                <div class="experience-title">
+                    <div class="experience-company">Parghi Infotech</div>
+                    <div class="experience-date">Jun 2016 – Jan 2017</div>
+                </div>
+                <div class="experience-role">Android Developer</div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Integrated OpenCV's pre-trained models for facial recognition, enhancing app functionality.</li>
+                        <li>Tested and debugged OpenCV-based features for accuracy and efficiency across Android devices.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Featured Projects</h2>
+            </div>
+            <div class="project-grid">
+                <!-- Project 1 -->
+                <div class="project-card reveal" style="--i: 1">
+                    <div class="project-image">YURINVTD</div>
+                    <div class="project-content">
+                        <h3>YurInvtd</h3>
+                        <p>Implemented features for uploading and downloading images and videos, utilizing Flutter's Isolate API to run these tasks asynchronously and efficiently.</p>
+                        <div class="tags">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Isolates</span>
+                            <span class="tag">Async Operations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card reveal" style="--i: 2">
+                    <div class="project-image">CHATTABOX</div>
+                    <div class="project-content">
+                        <h3>ChattaBox</h3>
+                        <p>Contributed to the development of an Android application for creating and sharing audio recording blurbs. Modified a third-party library to visualize recorded audio waveforms.</p>
+                        <div class="tags">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Audio Processing</span>
+                            <span class="tag">Custom Visualizations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card reveal" style="--i: 3">
+                    <div class="project-image">TRAKZEE</div>
+                    <div class="project-content">
+                        <h3>Trakzee</h3>
+                        <p>Implemented real-time vehicle tracking features, utilizing GPS data to display current vehicle locations on a map. Converted existing Java codebase to Kotlin, improving maintainability.</p>
+                        <div class="tags">
+                            <span class="tag">Kotlin</span>
+                            <span class="tag">GPS Tracking</span>
+                            <span class="tag">Maps Integration</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card reveal" style="--i: 4">
+                    <div class="project-image">CAMORIFY</div>
+                    <div class="project-content">
+                        <h3>Camorify</h3>
+                        <p>Integrated touch gesture controls with Canvas to enable intuitive image manipulation. Implemented undo/redo functionality for Canvas operations, improving usability.</p>
+                        <div class="tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">Canvas API</span>
+                            <span class="tag">Gesture Controls</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-container">
+                <div class="about-content">
+                    <p>I'm a passionate Tech Lead with expertise in mobile application development, specializing in Flutter, Kotlin, and Java. With a proven track record of leading development teams and creating performant applications, I thrive at the intersection of technology and user experience.</p>
+                    <p>My journey in mobile development began with Java for Android, evolved through Kotlin adoption, and expanded into cross-platform solutions with Flutter. I believe in writing clean, maintainable code and building applications that solve real-world problems with elegant solutions.</p>
+                    
+                    <h3>My Tech Stack</h3>
+                    <div class="skills">
+                        <div class="skill">Flutter</div>
+                        <div class="skill">Bloc</div>
+                        <div class="skill">Kotlin</div>
+                        <div class="skill">Android (Java)</div>
+                        <div class="skill">Jetpack Compose</div>
+                        <div class="skill">Firebase</div>
+                        <div class="skill">SQLite</div>
+                        <div class="skill">Hive</div>
+                        <div class="skill">Web Sockets</div>
+                        <div class="skill">Custom Animations</div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/500/500" alt="Harsh Modi Photo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-title reveal">
